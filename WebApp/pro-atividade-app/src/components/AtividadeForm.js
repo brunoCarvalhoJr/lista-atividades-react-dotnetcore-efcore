@@ -56,7 +56,6 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
 
     return (
         <>
-            <h1>Atividade {atividade.id !== 0 ? atividade.id : ''}</h1>
             <form className='row g-3' onSubmit={handleSubmit}>
                 <div className='col-md-6'>
                     <label className='form-label'>Titulo</label>
@@ -79,10 +78,10 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                         onChange={inputTextHandler}
                         value={atividade.prioridade} 
                     >
-                        <option defaultValue="0">Selecionar...</option>
-                        <option value={1}>Baixa</option>
-                        <option value={2}>Normal</option>
-                        <option value={3}>Alta</option>
+                        <option value="NaoDefinido">Selecionar...</option>
+                        <option value={'Baixa'}>Baixa</option>
+                        <option value={'Normal'}>Normal</option>
+                        <option value={'Alta'}>Alta</option>
                     </select>
                 </div>
                 <div className='col-md-12'>
@@ -101,20 +100,32 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                 <div className='col-12 mt-0'>
                     {
                         atividade.id === 0 ?
+                        <>
                             <button 
-                                className='btn btn-outline-secondary' 
+                                className='btn btn-outline-success me-2' 
                                 type="submit"
                             >
                                 <FontAwesomeIcon 
                                     icon={"fas fa-plus"} 
                                     className='me-2'
                                 /> 
-                                Atividade 
+                                Salvar 
                             </button>
+                            <button 
+                                className='btn btn-outline-warning' 
+                                onClick={handleCancelar}
+                            >
+                                <FontAwesomeIcon 
+                                    icon={"fas fa-plus"} 
+                                    className='me-2'
+                                /> 
+                                Cancelar 
+                            </button>
+                        </>
                         :
                         <>
                             <button 
-                                className='btn btn-outline-success  me-2' 
+                                className='btn btn-outline-success me-2' 
                                 type="submit"
                             >
                                 <FontAwesomeIcon 

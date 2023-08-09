@@ -1,16 +1,19 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
-export default function Atividade({atividade, deleteAtividade, pegarAtividade}) {
+library.add(fas, far)
+
+export default function Atividade({atividade, handleConfirmModal, pegarAtividade}) {
   
 	function prioridadeLabel(parametro) {
 		switch(parametro){
-			case '1':
-				return 'Baixa';
-			case '2':
-				return 'Média';
-			case '3':
-				return 'Alta';
+			case 'Baixa':
+			case 'Normal':
+			case 'Alta':
+				return parametro;
 			default:
 				return 'Não Definido';
 		}
@@ -18,12 +21,12 @@ export default function Atividade({atividade, deleteAtividade, pegarAtividade}) 
 
 	function prioridadeStyle(parametro, icon) {
 		switch(parametro){
-			case '1':
+			case 'Baixa':
 				return icon ? 'smile' : 'success';
-			case '2':
-				return icon ? 'meh' : 'warning';
-			case '3':
-				return icon ? 'frown' : 'danger';
+			case 'Normal':
+				return icon ? 'meh' : 'dark';
+			case 'Alta':
+				return icon ? 'frown' : 'warning';
 			default:
 				return 'Não Definido';
 		}
@@ -41,7 +44,7 @@ export default function Atividade({atividade, deleteAtividade, pegarAtividade}) 
             Prioridade: 
             <span className={'ms-1 text-' + prioridadeStyle(atividade.prioridade)}>
               {
-                (atividade.prioridade === ("1" || "2" || "3")) &&
+                (atividade.prioridade === "Baixa" || atividade.prioridade === "Normal" || atividade.prioridade === "Alta") &&
                 <FontAwesomeIcon 
                   icon={"fa-regular fa-face-" + prioridadeStyle(atividade.prioridade, true)} 
                   className='me-1'
@@ -64,7 +67,7 @@ export default function Atividade({atividade, deleteAtividade, pegarAtividade}) 
           </button>
           <button 
             className="btn btn-sm btn-outline-danger" 
-            onClick={() => deleteAtividade(atividade.id)}
+            onClick={() => handleConfirmModal(atividade.id)}
           >
             <FontAwesomeIcon icon="fa-solid fa-trash"  className='me-2'/>
             Deletar
