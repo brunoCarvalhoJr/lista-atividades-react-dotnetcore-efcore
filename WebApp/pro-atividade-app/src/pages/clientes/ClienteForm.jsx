@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import TitlePage from "../../components/TitlePage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ClienteForm() {
 
-    let history =  useHistory();
+    let navigate =  useNavigate();
 	let { id } = useParams();
 
 	return (
@@ -13,7 +13,7 @@ export default function ClienteForm() {
 			<TitlePage title={'Cliente Detalhes ' + (id !== undefined ? id : '')}>
 				<Button 
 					variant="secondary" 
-					onClick={() => history.goBack()}
+					onClick={() => navigate('/cliente/lista')}
 				>
 					<FontAwesomeIcon 
 						icon={"fas fa-arrow-left"}

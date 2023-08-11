@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 const clientes = [
     {
@@ -46,7 +46,7 @@ const clientes = [
 
 export default function ClienteLista() {
 
-    const history =  useHistory();
+    const navigate =  useNavigate();
     const [ termoDeBusca, setTermoDeBusca ] = useState('');
 
     const handleInputChange = (e) => {
@@ -65,7 +65,7 @@ export default function ClienteLista() {
     })
 
     const novoCliente = () => {
-        history.push('/cliente/detalhe')
+        navigate('/cliente/detalhe')
     }
 
     return (
@@ -111,7 +111,7 @@ export default function ClienteLista() {
                                         <div>
                                             <button 
                                                 className="btn btn-sm btn-outline-primary me-2" 
-                                                onClick={() => history.push(
+                                                onClick={() => navigate(
                                                     `/cliente/detalhe/${id}`
                                                 )}
                                             >
