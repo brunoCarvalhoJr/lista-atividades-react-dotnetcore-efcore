@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TitlePage from "../../components/TitlePage";
 import Form from 'react-bootstrap/Form';
@@ -5,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { faPlus, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 
 const clientes = [
     {
@@ -44,12 +46,12 @@ const clientes = [
     }
 ]
 
-export default function ClienteLista() {
+const ClienteLista: React.FC = () => {
 
     const navigate =  useNavigate();
     const [ termoDeBusca, setTermoDeBusca ] = useState('');
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
         e.preventDefault();
         setTermoDeBusca(e.target.value);
@@ -73,7 +75,7 @@ export default function ClienteLista() {
             <TitlePage title='Cliente Lista'>
 				<Button variant="outline-primary" onClick={novoCliente}>
 					<FontAwesomeIcon 
-						icon={"fas fa-plus"} 
+						icon={faPlus} 
 					/> 
 				</Button>
             </TitlePage>
@@ -83,7 +85,7 @@ export default function ClienteLista() {
                 </InputGroup.Text>
                 <Form.Control
                     placeholder="Bucar por nome do cliente"
-                    onChange={(e) => handleInputChange(e)}
+                    onChange={handleInputChange}
                 />
             </InputGroup>
             <table className="table table-striped table-hover">
@@ -116,14 +118,14 @@ export default function ClienteLista() {
                                                 )}
                                             >
                                                 <FontAwesomeIcon 
-                                                    icon={"fas fa-user-edit"} 
+                                                    icon={faUserEdit} 
                                                     className="me-2"
                                                 /> 
                                                 Editar
                                             </button>
                                             <button className="btn btn-sm btn-outline-danger me-2">
                                                 <FontAwesomeIcon 
-                                                    icon={"fas fa-user-times"} 
+                                                    icon={faUserTimes} 
                                                     className="me-2"
                                                 /> 
                                                 Desativar  
@@ -138,4 +140,7 @@ export default function ClienteLista() {
             </table>
         </>
     )
-}
+};
+
+export default ClienteLista; 
+

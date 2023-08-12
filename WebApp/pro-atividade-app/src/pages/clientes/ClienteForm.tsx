@@ -1,9 +1,11 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import TitlePage from "../../components/TitlePage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from 'react-router-dom';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-export default function ClienteForm() {
+const ClienteForm: React.FC = () => {
 
     let navigate =  useNavigate();
 	let { id } = useParams();
@@ -16,7 +18,7 @@ export default function ClienteForm() {
 					onClick={() => navigate('/cliente/lista')}
 				>
 					<FontAwesomeIcon 
-						icon={"fas fa-arrow-left"}
+						icon={faArrowLeft}
 						className='me-2' 
 					/> 
 					Voltar
@@ -27,4 +29,6 @@ export default function ClienteForm() {
 			</div>
 		</>
 	)
-}
+};
+
+export default ClienteForm; 

@@ -4,7 +4,6 @@ import React from 'react'
 const PageNotFound = () => {
     return (
         <div id="wrapper">
-            <img src="https://i.imgur.com/qIufhof.png" />
             <div id="info">
                 <h3>
                     Pagina não encontrada
@@ -14,4 +13,4 @@ const PageNotFound = () => {
     )
 }
 
-export default PageNotFound
+export default PageNotFound;

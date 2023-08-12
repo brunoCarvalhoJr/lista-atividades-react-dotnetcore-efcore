@@ -1,7 +1,14 @@
 import React from 'react'
 import AtividadeItem from './AtividadeItem';
+import { AtividadeListaProps } from '../../model/atividadeProps';
 
-export default function AtividadeLista({atividades, handleConfirmModal, pegarAtividade}) {
+const AtividadeLista: React.FC<AtividadeListaProps> = ({
+			atividades, 
+			handleConfirmModal, 
+			pegarAtividade
+		}: AtividadeListaProps
+	) => {
+		
 	return (
 		<div className="mt-3">
 			{atividades.map(atividade => (
@@ -15,3 +22,5 @@ export default function AtividadeLista({atividades, handleConfirmModal, pegarAti
 		</div>
 	)
 }
+
+export default AtividadeLista;

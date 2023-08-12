@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "WebAPI/src/ProAtividade.API/ProAtividade.API.sln"
+    "dotnet.defaultSolution": "WebAPI/src/ProAtividade.API/ProAtividade.API.sln",
+    "search.useIgnoreFiles": true
 }

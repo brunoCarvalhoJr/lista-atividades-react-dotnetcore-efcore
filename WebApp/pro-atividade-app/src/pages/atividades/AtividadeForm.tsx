@@ -1,14 +1,24 @@
+import React from 'react';
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { AtividadeFormProps } from '../../model/atividadeProps';
+import { IAtividade, Prioridade } from '../../model/atividade';
    
-const  atividadeInicial  = {
+const  atividadeInicial: IAtividade = {
     id: 0,
     titulo: '',
-    prioridade: 0,
+    prioridade: Prioridade.NaoDefinido,
     descricao: ''
 }
 
-export default function AtividadeForm({addAtividade, atividadeSelecionada, atualizarAtividade, cancelarAtividade}) {
+const AtividadeForm: React.FC<AtividadeFormProps> = ({
+            addAtividade, 
+            atividadeSelecionada, 
+            atualizarAtividade, 
+            cancelarAtividade
+        } : AtividadeFormProps
+    ) => {
 
     const atividadeAtual = () => {
         if(atividadeSelecionada.id !== 0){
@@ -18,7 +28,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
         }
     }
 
-    const [atividade, setAtividade] = useState(atividadeAtual());
+    const [atividade, setAtividade] = useState<IAtividade>(atividadeAtual());
 
     useEffect(() => {
         if(atividadeSelecionada.id !== 0){
@@ -26,7 +36,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
         }
     },[atividadeSelecionada])
 
-    const inputTextHandler = (e) => {
+    const handleValue = (e: any) => {
         const {name, value} = e.target;
 
         setAtividade({
@@ -35,7 +45,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
         });
     }
 
-    const handleCancelar = (e) => {
+    const handleCancelar = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         cancelarAtividade();
@@ -43,7 +53,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
         setAtividade(atividadeInicial);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if(atividadeSelecionada.id !== 0)
@@ -66,7 +76,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                         placeholder='Título'
                         className='form-control' 
                         value={atividade.titulo} 
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                     />
                 </div>
                 <div className="col-md-6">
@@ -75,7 +85,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                         id="prioridade" 
                         name="prioridade"
                         className="form-select"
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                         value={atividade.prioridade} 
                     >
                         <option value="NaoDefinido">Selecionar...</option>
@@ -87,13 +97,12 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                 <div className='col-md-12'>
                     <label className='form-label'>Descrição</label>
                     <textarea 
-                        type="text" 
                         id="descricao" 
                         name="descricao"
                         className='form-control' 
                         placeholder='Descrição'
                         value={atividade.descricao} 
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                     />
                 <hr />
                 </div>
@@ -106,7 +115,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                                 type="submit"
                             >
                                 <FontAwesomeIcon 
-                                    icon={"fas fa-plus"} 
+                                    icon={faPlus} 
                                     className='me-2'
                                 /> 
                                 Salvar 
@@ -116,7 +125,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                                 onClick={handleCancelar}
                             >
                                 <FontAwesomeIcon 
-                                    icon={"fas fa-plus"} 
+                                    icon={faTimes} 
                                     className='me-2'
                                 /> 
                                 Cancelar 
@@ -129,7 +138,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                                 type="submit"
                             >
                                 <FontAwesomeIcon 
-                                    icon={"fas fa-plus"} 
+                                    icon={faPlus} 
                                     className='me-2'
                                 /> 
                                 Salvar 
@@ -139,7 +148,7 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
                                 onClick={handleCancelar}
                             >
                                 <FontAwesomeIcon 
-                                    icon={"fas fa-plus"} 
+                                    icon={faTimes} 
                                     className='me-2'
                                 /> 
                                 Cancelar 
@@ -152,3 +161,5 @@ export default function AtividadeForm({addAtividade, atividadeSelecionada, atual
         </>
     )
 }
+
+export default AtividadeForm;
